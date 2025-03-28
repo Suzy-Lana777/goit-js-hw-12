@@ -76,8 +76,12 @@ export function renderGallery(data) {
   refs.list.insertAdjacentHTML('beforeend', markup);
 
   const lightbox = new SimpleLightbox('.gallery a', {
+    captions: true,
     captionsData: 'alt',
-    animationSpeed: 250,
+    captionType: 'attr',
+    captionDelay: 250,
+    animationSpeed: 350,
+    captionPosition: 'bottom',
   });
 
   lightbox.refresh();
