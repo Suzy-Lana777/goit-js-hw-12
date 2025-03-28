@@ -40,45 +40,45 @@ export function createCart(item) {
     </li>`;
 }
 
-export function createsCart(items) {
-  return items.map(createCart).join('');
-}
+// export function createsCart(items) {
+//   return items.map(createCart).join('');
+// }
 
-export function clearGallery() {
-  const gallery = document.querySelector('.gallery');
-  if (gallery) {
-    gallery.innerHTML = '';  // Очищаємо галерею
-  }
-}
+// export function clearGallery() {
+//   const gallery = document.querySelector('.gallery');
+//   if (gallery) {
+//     gallery.innerHTML = '';  // Очищаємо галерею
+//   }
+// }
 
-export function renderGallery(data) {
-  const refs = {
-    list: document.querySelector('.gallery'),
-  };
+// export function renderGallery(data) {
+//   const refs = {
+//     list: document.querySelector('.gallery'),
+//   };
 
-  if (!refs.list) {
-    console.error('No images found');
-    return;
-  }
+//   if (!refs.list) {
+//     console.error('No images found');
+//     return;
+//   }
 
-  clearGallery();
+//   clearGallery();
 
-  if (data.length === 0) {
-    iziToast.warning({
-      title: 'No images found',
-      message: 'Try another search term!',
-      position: 'topRight',
-    });
-    return;
-  }
+//   if (data.length === 0) {
+//     iziToast.warning({
+//       title: 'No images found',
+//       message: 'Try another search term!',
+//       position: 'topRight',
+//     });
+//     return;
+//   }
 
-  const markup = createsCart(data);
-  refs.list.insertAdjacentHTML('beforeend', markup);
+//   const markup = createsCart(data);
+//   refs.list.insertAdjacentHTML('beforeend', markup);
 
-  const lightbox = new SimpleLightbox('.gallery a', {
-    captionsData: 'alt',
-    animationSpeed: 250,
-  });
+//   const lightbox = new SimpleLightbox('.gallery a', {
+//     captionsData: 'alt',
+//     animationSpeed: 250,
+//   });
 
-  lightbox.refresh();
-}
+//   lightbox.refresh();
+// }
