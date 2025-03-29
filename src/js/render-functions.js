@@ -1,9 +1,14 @@
 // функції для відображення елементів інтерфейсу
 
+// ===========================
+
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-export function createCart(item) {
+let lightbox; // Змінна для збереження екземпляра SimpleLightbox
+
+// Функція для створення HTML-розмітки для кожного елемента
+function createCart(item) {
   const {
     webformatURL,
     largeImageURL,
@@ -40,10 +45,12 @@ export function createCart(item) {
     </li>`;
 }
 
-export function createsCart(items) {
+// Функція для створення розмітки для всіх зображень
+function createsCart(items) {
   return items.map(createCart).join('');
 }
 
+// Функція очищення галереї
 export function clearGallery() {
   const gallery = document.querySelector('.gallery');
   if (gallery) {
@@ -51,6 +58,7 @@ export function clearGallery() {
   }
 }
 
+// Функція рендерингу зображень у галерею
 export function renderGallery(data) {
   const refs = {
     list: document.querySelector('.gallery'),
@@ -61,8 +69,6 @@ export function renderGallery(data) {
     return;
   }
 
-  clearGallery();
-
   if (data.length === 0) {
     iziToast.warning({
       title: 'No images found',
@@ -72,17 +78,25 @@ export function renderGallery(data) {
     return;
   }
 
+  // Генерація розмітки для нових зображень
   const markup = createsCart(data);
+  
+  // Додавання нових зображень до вже існуючих
   refs.list.insertAdjacentHTML('beforeend', markup);
 
-  const lightbox = new SimpleLightbox('.gallery a', {
-    captions: true,
-    captionsData: 'alt',
-    captionType: 'attr',
-    captionDelay: 250,
-    animationSpeed: 350,
-    captionPosition: 'bottom',
-  });
+  // Якщо lightbox ще не ініціалізований, створюємо його
+  if (!lightbox) {
+    lightbox = new SimpleLightbox('.gallery a', {
+      captions: true,
+      captionsData: 'alt',
+      captionType: 'attr',
+      captionDelay: 250,
+      animationSpeed: 350,
+      captionPosition: 'bottom',
+    });
+  }
 
+  // Оновлення SimpleLightbox після додавання нових зображень
   lightbox.refresh();
 }
+

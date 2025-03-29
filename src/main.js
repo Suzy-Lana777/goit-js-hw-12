@@ -122,4 +122,3 @@ function smoothScroll() {
     window.scrollBy({ top: itemHeight * 2, behavior: 'smooth' });
   }
 }
-
